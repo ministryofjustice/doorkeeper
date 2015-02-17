@@ -7,6 +7,8 @@
 - [#568] TokensController: Memoize strategy.authorize_response result to enable
     subclasses to use the response object.
 - [#571] Fix database initialization issues in some configurations.
+- Added a config option for protect_from_forgery_options, to allow CSRF
+  behaviour to be customized
 
 
 ## 2.1.0
