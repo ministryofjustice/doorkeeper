@@ -284,6 +284,19 @@ describe Doorkeeper, 'configuration' do
     end
   end
 
+  describe 'protect_from_forgery_options' do
+    it "is {} by default" do
+      expect(Doorkeeper.configuration.protect_from_forgery_options).to eq({})
+    end
+
+    it 'can change the value' do
+      Doorkeeper.configure do
+        protect_from_forgery_options( cheese: 'gruyere' )
+      end
+      expect(subject.protect_from_forgery_options).to eq( {cheese: 'gruyere'} )
+    end
+  end
+
   it 'raises an exception when configuration is not set' do
     old_config = Doorkeeper.configuration
     Doorkeeper.module_eval do

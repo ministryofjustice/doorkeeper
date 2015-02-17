@@ -108,6 +108,10 @@ and that your `initialize_models!` method doesn't raise any errors.\n
       def force_ssl_in_redirect_uri(boolean)
         @config.instance_variable_set("@force_ssl_in_redirect_uri", boolean)
       end
+
+      def protect_from_forgery_options( hash={} )
+        @config.instance_variable_set('@protect_from_forgery_options', hash)
+      end
     end
 
     module Option
@@ -198,6 +202,7 @@ and that your `initialize_models!` method doesn't raise any errors.\n
     option :realm,                          default: 'Doorkeeper'
     option :force_ssl_in_redirect_uri,      default: !Rails.env.development?
     option :grant_flows,                    default: %w(authorization_code client_credentials)
+    option :protect_from_forgery_options,   default: {}
 
     attr_reader :reuse_access_token
 
@@ -243,6 +248,10 @@ and that your `initialize_models!` method doesn't raise any errors.\n
 
     def token_grant_types
       @token_grant_types ||= calculate_token_grant_types
+    end
+
+    def protect_from_forgery_options
+      @protect_from_forgery_options ||= {}
     end
 
     private
